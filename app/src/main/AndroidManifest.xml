@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="io.github.yuk7.idspooflinex">
 
     <application
         android:allowBackup="true"
+        android:forceQueryable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DevIDSpoofer4LINE">
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="ANDROID_ID Spoofer for LINE" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="53" />
+        <meta-data
+            android:name="xposedsharedprefs"
+            android:value="true"/>
+        <meta-data android:name="xposedscope"
+            android:resource="@array/scope" />
+
+        <provider
+            android:authorities="${applicationId}.SettingProvider"
+            android:name=".providers.SettingProvider"
+            android:directBootAware="true"
+            android:enabled="true"
+            android:exported="true"
+            android:grantUriPermissions="true" />
+
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,5 +44,8 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
 </manifest>
